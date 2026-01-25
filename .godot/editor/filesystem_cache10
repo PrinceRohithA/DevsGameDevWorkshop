@@ -1,0 +1,15 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1769332825
+ememy.gd::GDScript::2813426206806649998::1769332334::0::1::::Enemy<>CharacterBody2D<><>0<>0<><>::
+ememy.tscn::PackedScene::893021453728905774::1769332998::0::1::::<><><>0<>0<><>::uid://dbw4bei4onra0::::res://Asserts/Orc.png<>uid://bgc3yoxbrmyoc::::res://ememy.gd
+game.tscn::PackedScene::9063413507106114203::1769332998::0::1::::<><><>0<>0<><>::uid://dhjlq63bgqg48::::res://Asserts/Dungeon_Tileset.png<>uid://dhrk4ybl2vw2m::::res://Player/player.tscn<>uid://myt6yns5rjxu::::res://ememy.tscn
+icon.svg::CompressedTexture2D::4028010638792714182::1768661254::1768661260::1::::<><><>0<>0<>04079da3974470b754c71bf631ebb712<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+you_died.tscn::PackedScene::2595871292241258391::1769142692::0::1::::<><><>0<>0<><>::
+::res://Asserts/::1769145486
+Dungeon_Tileset.png::CompressedTexture2D::7669861487487445651::1768661620::1768734890::1::::<><><>0<>0<>ea1d626538de0379ebd3aba23303a16d<>res://.godot/imported/Dungeon_Tileset.png-6a0f5745f22a95482600723831babfa9.ctex::
+Orc.png::CompressedTexture2D::7276630007679485509::1769067237::1769067237::1::::<><><>0<>0<>6500e645c4a0e203a2e049292ce3b344<>res://.godot/imported/Orc.png-50bbe255483f542ce9b4a33de2ea0f8c.ctex::
+Soldier.png::CompressedTexture2D::8238853963583656566::1769067226::1769067228::1::::<><><>0<>0<>6953eee6ca268cecdeda7d971564fa70<>res://.godot/imported/Soldier.png-83291787807e3381db1a7ee6ca66680b.ctex::
+::res://Enemy/::0
+::res://Player/::1769332825
+player.gd::GDScript::6713628255910618190::1769332245::0::1::::Player<>CharacterBody2D<><>0<>0<><>::
+player.tscn::PackedScene::7686338598957383026::1769332825::0::1::::<><><>0<>0<><>::uid://dpm7yrs46kxus::::res://Asserts/Soldier.png<>uid://c2weqg3oc72lm::::res://Player/player.gd
