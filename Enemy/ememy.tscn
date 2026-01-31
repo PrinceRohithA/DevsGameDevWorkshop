@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://myt6yns5rjxu"]
+[gd_scene format=3 uid="uid://myt6yns5rjxu"]
 
 [ext_resource type="Texture2D" uid="uid://dbw4bei4onra0" path="res://Asserts/Orc.png" id="1_gtp8l"]
 [ext_resource type="Script" uid="uid://bgc3yoxbrmyoc" path="res://Enemy/ememy.gd" id="1_wip2b"]
@@ -37,6 +37,38 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_fajhf"]
+resource_name = "died"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_tv1cu"]
+resource_name = "hit"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
 [sub_resource type="Animation" id="Animation_gtp8l"]
 resource_name = "idle"
 loop_mode = 1
@@ -71,38 +103,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_tv1cu"]
-resource_name = "hit"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
-}
-
-[sub_resource type="Animation" id="Animation_fajhf"]
-resource_name = "died"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kavud"]
 _data = {
 &"RESET": SubResource("Animation_wip2b"),
@@ -122,47 +122,45 @@ radius = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wip2b"]
 size = Vector2(9, 14)
 
-[node name="Ememy" type="CharacterBody2D"]
+[node name="Ememy" type="CharacterBody2D" unique_id=666716027]
+motion_mode = 1
 script = ExtResource("1_wip2b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=524254085]
 texture_filter = 1
 position = Vector2(0, -7)
 texture = ExtResource("1_gtp8l")
 hframes = 8
 vframes = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=967006851]
 position = Vector2(0.75, -1)
 shape = SubResource("RectangleShape2D_gtp8l")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kavud")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1913157586]
+libraries/ = SubResource("AnimationLibrary_kavud")
 
-[node name="Vision" type="Area2D" parent="."]
+[node name="Vision" type="Area2D" parent="." unique_id=1450255559]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" unique_id=217951279]
 shape = SubResource("CircleShape2D_wip2b")
 
-[node name="AttakArea" type="Area2D" parent="."]
+[node name="AttakArea" type="Area2D" parent="." unique_id=11631633]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttakArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttakArea" unique_id=1813305429]
 shape = SubResource("CircleShape2D_kavud")
 
-[node name="RaycastArea" type="Area2D" parent="."]
+[node name="RaycastArea" type="Area2D" parent="." unique_id=328822279]
 collision_layer = 4
 collision_mask = 4
-collision_priority = 1.2
 priority = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RaycastArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaycastArea" unique_id=1254090045]
 position = Vector2(0.5, -7)
 shape = SubResource("RectangleShape2D_wip2b")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1230838993]
 offset_left = -5.0000005
 offset_top = -21.0
 offset_right = 49.999996

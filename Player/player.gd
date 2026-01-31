@@ -8,7 +8,7 @@ class_name Player
 
 var health: int
 var freeze: bool = false
-var you_died_scene: PackedScene = load("res://you_died.tscn")
+var you_died_scene: PackedScene = load("res://Game/you_died.tscn")
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_action_just_pressed("attack"):
 			animation_player.play("attack", -1, 2)
 			freeze = true
-	
+		
 	move_and_slide()
 
 func _on_animation_finished(anim_name):

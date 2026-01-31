@@ -2,18 +2,23 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var vision: Area2D = $Vision
-@onready var player: Player = %Player
 @onready var attak_area: Area2D = $AttakArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar
 
 @export var speed: float = 10
+@export var knockback_friction: float = 20
 @export var max_health: int = 10
 @export var damage: int = 2
 
+var player: Player
+
 var health: int
+var is_hit: bool = false
 var freeze: bool = false
+var move_dir: Vector2
+var knockback_velocity: Vector2
 
 var is_player_on_vision: bool = false
 var is_player_on_attackarea: bool = false
@@ -21,6 +26,9 @@ var is_player_on_attackarea: bool = false
 signal hit(damage: int)
 
 func _ready() -> void:
+	player = get_tree().get_first_node_in_group("player") as Player
+	if player == null:
+		queue_free()
 	vision.body_entered.connect(_on_vision_entered)
 	vision.body_exited.connect(_on_vision_exited)
 	attak_area.body_entered.connect(_on_attackarea_entered)
@@ -33,7 +41,7 @@ func _ready() -> void:
 	health_bar.value = max_health
 
 func _on_hit(_damage: int):
-	freeze = true
+	is_hit = true
 	animation_player.play("hit", -1, 2)
 	health -= _damage
 	health_bar.value = health
@@ -59,10 +67,11 @@ func _on_vision_exited(body):
 func _physics_process(_delta: float) -> void:
 	if !freeze:
 		if is_player_on_vision:
-			var move_dir: Vector2 = (player.global_position - global_position).normalized()
+			move_dir = (player.global_position - global_position).normalized()
 			
 			if is_player_on_attackarea:
 				animation_player.play("attack")
+				freeze = true
 				velocity = Vector2.ZERO
 				
 			else:
@@ -77,15 +86,21 @@ func _physics_process(_delta: float) -> void:
 				sprite_2d.flip_h = false
 			else:
 				sprite_2d.flip_h = true
+		if is_hit:
+			velocity = velocity.move_toward(move_dir * 20 * -1, knockback_friction)
 		
 	move_and_slide()
 
 func _on_animation_finished(anim_name):
 	if anim_name == "attack":
-		player.hit.emit(damage)
+		var bodies = attak_area.get_overlapping_bodies()
+		for i in bodies:
+			if i is Player:
+				player.hit.emit(damage)
+		freeze = false
 	
 	elif anim_name == "hit":
-		freeze = false
+		is_hit = false
 	
 	elif anim_name == "died":
 		queue_free()
